@@ -60,7 +60,7 @@ class _FoodPageStateMain extends State<FoodPageMain> {
               ),
             ),
           ),
-          FoodPageBody(),
+          Expanded(child: FoodPageBody()),
         ],
       ),
     );
