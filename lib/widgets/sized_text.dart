@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_ordering_app/constants/dimensions.dart';
 
 class SizedText extends StatelessWidget {
   Color? color;
@@ -9,7 +10,7 @@ class SizedText extends StatelessWidget {
     Key? key,
     this.color = const Color(0xFF332D2B),
     required this.text,
-    this.size = 20,
+    this.size = 0,
     this.textOverflow = TextOverflow.ellipsis,
   }) : super(key: key);
 
@@ -22,7 +23,7 @@ class SizedText extends StatelessWidget {
         color: color,
         fontWeight: FontWeight.w400,
         fontFamily: 'Roboto',
-        fontSize: size,
+        fontSize: size== 0?Dimensions.font16: size,
       ),
     );
   }
