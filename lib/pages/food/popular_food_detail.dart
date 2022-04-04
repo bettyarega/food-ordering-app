@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:food_ordering_app/constants/app_constants.dart';
 import 'package:food_ordering_app/constants/colors.dart';
 import 'package:food_ordering_app/constants/dimensions.dart';
+import 'package:food_ordering_app/controllers/popular_product_controller.dart';
 import 'package:food_ordering_app/widgets/expandable_text_widget.dart';
 import 'package:food_ordering_app/widgets/food_info_column.dart';
 import 'package:food_ordering_app/widgets/icon.dart';
 import 'package:food_ordering_app/widgets/icon_and_text_widget.dart';
 import 'package:food_ordering_app/widgets/sized_text.dart';
 import 'package:food_ordering_app/widgets/small_text.dart';
+import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({ Key? key }) : super(key: key);
+  int pageId;
+  PopularFoodDetail({ Key? key, required this.pageId }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<PopularProductController>().popularProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(children: [
@@ -26,7 +31,7 @@ class PopularFoodDetail extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/image/food0.png"),),
+                image: NetworkImage(AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!),),
             ),
           ),),
         //icon widget
@@ -54,13 +59,13 @@ class PopularFoodDetail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FoodInfoColumn(text: 'Ethiopian Side',),
+                FoodInfoColumn(text: product.name!,),
                 SizedBox(height: Dimensions.height16,),
                 SizedText(text: 'Introduce'),
                 //expandable text
-                Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: "chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian stylechicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style chicken marinated in a spicy sauce ethiopian style ")))
+                Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: product.description!))
 
-              ],
+                )],
             ),
                 
         ))
@@ -100,7 +105,7 @@ class PopularFoodDetail extends StatelessWidget {
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.radius16),
                 color: AppColors.mainColor,
                 ),
-                child: SizedText(text: '10ETB | Add to cart',color: Colors.white,),
+                child: SizedText(text: '${product.price!}\$ | Add to cart',color: Colors.white,),
               )
 
           ],
