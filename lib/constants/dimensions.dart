@@ -36,6 +36,7 @@ class Dimensions{
   
   static double listViewContainer = screenHeight/2.66;
   static double listViewTextContainer = screenHeight/8.65;
+  static double listViewImgSize = screenWidth/3.27;
   
   
   static double popularFoodImgSize = screenHeight/2.38;
